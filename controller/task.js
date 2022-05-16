@@ -34,11 +34,15 @@ const getTask = async (req, res) => {
 const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const task = await Task.findByIdAndUpdate(id, req.body, {new:true, runValidators: true});
+    const task = await Task.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!task) {
       return res.status(404).json({ msg: 'No such task' });
     }
-    res.status(200).json({});
+    await task.save();
+    res.redirect('index.html');
   } catch (e) {
     res.status(500).json({ msg: e });
   }

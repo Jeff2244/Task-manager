@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema({
   name: {
     type: String,
-    require: [true, 'must need a name'],
+    required: [true, 'must need a name'],
     trim: true,
     maxlength: [20, 'name should not be more than 20 charaters']
   },
